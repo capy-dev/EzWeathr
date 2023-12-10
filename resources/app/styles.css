@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap');
+
+body {
+    font-family: 'Rubik', sans-serif;
+    background-image: url("bg.jpg");
+    background-size: cover;
+    font-weight: 300;
+    margin: 0; /* Remove default body margin */
+}
+
+.infocontainer {
+    color: #222222;
+    opacity: 88%;
+    background-color: #535353;
+    width: 45vw; /* Adjusted to viewport width */
+    height: 55vh;
+    position:fixed;
+    border-radius: 10px;
+    text-align: center;
+    margin-left:  27vw;
+    margin-top: 10vh;
+    border-top: 2vh solid transparent; /* Adjusted border-top size */
+}
+
+.head {
+    border-top: 2vh solid transparent; /* Adjusted border-top size */
+}
+
+.summary {
+    opacity: 88%;
+    position:fixed;
+    width: 45%; /* Adjusted to viewport width */
+    height: 25%;
+    margin-left:  27vw;
+
+    margin-top: 425px;
+    background-color: #535353;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 10px;
+}
+
+h2 {
+    color: #222222;
+    opacity: 100%;
+    position: static;
+    margin-top: 2vh;
+
+    /* Adjusted font size using viewport width */
+}
+
+#location {
+    opacity: 100%;
+    position: static;
+    margin-top: 2vh;
+    font-size: 4vw; /* Adjusted font size using viewport width */
+}

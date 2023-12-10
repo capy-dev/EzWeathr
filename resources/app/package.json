@@ -1,0 +1,16 @@
+{
+  "name": "EzWeathr",
+  "productName": "EzWeathr",
+  "description": "A Weather App Designed To Be Simple.",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "therealcapy",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "@electron/packager": "^18.1.1",
+    "electron": "27.1.3"
+  }
+}

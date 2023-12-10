@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="./styles.css" rel="stylesheet">
+  <title>EzWeathr</title>
+</head>
+<body>
+  <div class="infocontainer">
+    <h1 id="location">Weather for your location</h1>
+    <h2>Chance of rain: <span id="rainchance"></span></h2>
+    <h2>Temperature: <span id="temp"></span></h2>
+    <h2>City: <span id="city"></span></h2>
+    <h2>Time: <span id="time"></span></h2>
+  </div>
+  <div class="summary">
+    <h2><span id="summarytext"></span></h2>
+  </div>
+
+
+  <script>
+    async function fetchData() {
+      try {
+        const response = await fetch('http://ip-api.com/json/');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        const timeResponse = await fetch("http://worldtimeapi.org/api/ip");
+        const timeData = await timeResponse.json();
+        const date = new Date(timeData.unixtime * 1000);
+        const formattedTime = `${date.getHours()}:${("0" + date.getMinutes()).substr(-2)}`;
+
+        const weatherResponse = await fetch("https://api.weather.gov/points/" + data.lat +"," + data.lon, {
+          headers: {"User-Agent": "(myweatherapp.com, contact@myweatherapp.com)"}
+        });
+        const weatherData = await weatherResponse.json();
+        console.log(weatherData);
+
+        const wr = await fetch(weatherData.properties.forecast);
+        const wd = await wr.json();
+        console.log(wd);
+
+
+
+        // Update HTML elements with API data
+        document.getElementById('location').innerText = `Weather for ${data.city}`;
+        document.getElementById('rainchance').innerText = wd.properties.periods[0].probabilityOfPrecipitation.value + "%";
+        document.getElementById('temp').innerText = wd.properties.periods[0].temperature + "°" + wd.properties.periods[0].temperatureUnit;
+        document.getElementById('city').innerText = data.city;
+        document.getElementById('time').innerText = formattedTime;
+        document.getElementById('summarytext').innerText = wd.properties.periods[0].detailedForecast;
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    }
+
+    // Call the fetchData function when the page loads
+    window.onload = fetchData;
+  </script>
+</body>
+</html>
